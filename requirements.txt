@@ -1,0 +1,19 @@
+# Part 2 — pipeline, features, visualisation, CLI
+pandas>=2.0
+numpy>=1.24
+matplotlib>=3.7
+
+# Part 3 — machine learning
+scikit-learn>=1.3
+mlxtend>=0.23          # association rule mining (apriori, association_rules)
+tensorflow>=2.15       # or: torch>=2.1  — pick one and delete the other
+shap>=0.44             # explainability (LIME alternative: lime>=0.2)
+
+# Part 3 — MLOps and deployment
+mlflow>=2.9
+fastapi>=0.110
+uvicorn>=0.27
+pydantic>=2.0
+
+# Notebooks
+jupyterlab>=4.0
