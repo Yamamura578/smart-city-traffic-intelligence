@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS traffic;
 -- .import loads every column as TEXT, so build a typed table from it.
 CREATE TABLE traffic AS
 SELECT
-    NULLIF(holiday, '')             AS holiday,
+    NULLIF(holiday, 'None')             AS holiday,
     CAST(temp AS REAL)              AS temp,
     CAST(rain_1h AS REAL)           AS rain_1h,
     CAST(snow_1h AS REAL)           AS snow_1h,
