@@ -17,3 +17,4 @@ pydantic>=2.0
 
 # Notebooks
 jupyterlab>=4.0
+scipy>=1.11

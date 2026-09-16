@@ -18,3 +18,4 @@ data/processed/*
 # NOTE: logs/ is intentionally NOT ignored. A sample pipeline.log is a
 # required deliverable. Likewise capstone_part3/mlruns/ — MLflow output is
 # a required deliverable, so keep it committed.
+.virtual_documents/
