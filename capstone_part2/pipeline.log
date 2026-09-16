@@ -1,53 +1,53 @@
-2026-09-16 23:35:27 | INFO     | root | Logging configured | level=DEBUG | file=/home/claude/repo/logs/pipeline.log
-2026-09-16 23:35:27 | INFO     | __main__ | Loaded raw data | rows=48204 | columns=9 | source=/home/claude/repo/data/raw/Metro_Interstate_Traffic_Volume.csv
-2026-09-16 23:35:27 | DEBUG    | __main__ | Raw dtypes: {'holiday': <StringDtype(storage='python', na_value=nan)>, 'temp': dtype('float64'), 'rain_1h': dtype('float64'), 'snow_1h': dtype('float64'), 'clouds_all': dtype('int64'), 'weather_main': <StringDtype(storage='python', na_value=nan)>, 'weather_description': <StringDtype(storage='python', na_value=nan)>, 'date_time': <StringDtype(storage='python', na_value=nan)>, 'traffic_volume': dtype('int64')}
-2026-09-16 23:35:27 | INFO     | __main__ | Schema validation passed | 9 expected columns present
-2026-09-16 23:35:27 | INFO     | __main__ | Parsed date_time | all 48204 timestamps valid
-2026-09-16 23:35:27 | INFO     | __main__ | Date range | first=2012-10-02 09:00:00 | last=2018-09-30 23:00:00
-2026-09-16 23:35:27 | INFO     | __main__ | Standardised categorical text in weather and holiday columns
-2026-09-16 23:35:27 | DEBUG    | __main__ | weather_main categories after standardisation: ['Clear', 'Clouds', 'Drizzle', 'Fog', 'Haze', 'Mist', 'Rain', 'Smoke', 'Snow', 'Squall', 'Thunderstorm']
-2026-09-16 23:35:27 | WARNING  | __main__ | Modified 1348 rows in 'holiday' | reason: forward-filled from 61 tagged midnight rows across 53 holiday dates
-2026-09-16 23:35:27 | DEBUG    | __main__ | Holiday dates identified: ['2012-10-08', '2012-11-12', '2012-11-22', '2012-12-25', '2013-01-01', '2013-02-18', '2013-05-27', '2013-07-04', '2013-08-22', '2013-09-02', '2013-10-14', '2013-11-11', '2013-11-28', '2013-12-25', '2014-01-01', '2014-01-20', '2014-02-17', '2014-05-26', '2015-07-03', '2015-08-27', '2015-09-07', '2015-10-12', '2015-11-11', '2015-11-26', '2015-12-25', '2016-01-01', '2016-02-15', '2016-05-30', '2016-07-04', '2016-08-25', '2016-09-05', '2016-10-10', '2016-11-11', '2016-11-24', '2016-12-26', '2017-01-02', '2017-01-16', '2017-02-20', '2017-05-29', '2017-07-04', '2017-08-24', '2017-09-04', '2017-10-09', '2017-11-10', '2017-11-23', '2017-12-25', '2018-01-01', '2018-01-15', '2018-02-19', '2018-05-28', '2018-07-04', '2018-08-23', '2018-09-03']
-2026-09-16 23:35:27 | WARNING  | __main__ | Dropped 17 rows | reason: fully duplicated records
-2026-09-16 23:35:27 | WARNING  | __main__ | Dropped 7612 rows | reason: repeated timestamps; retained the most severe weather observation per hour
-2026-09-16 23:35:27 | INFO     | __main__ | Duplicate handling complete | rows remaining=40575
-2026-09-16 23:35:27 | DEBUG    | __main__ | Imputed 4 rows in 'temp' for month 01 using median 265.48
-2026-09-16 23:35:27 | DEBUG    | __main__ | Imputed 6 rows in 'temp' for month 02 using median 265.89
-2026-09-16 23:35:28 | WARNING  | __main__ | Imputed 10 rows in 'temp' | reason: value outside physically plausible range; replaced with monthly median
-2026-09-16 23:35:28 | DEBUG    | __main__ | Imputed 1 rows in 'rain_1h' for month 07 using median 0.00
-2026-09-16 23:35:28 | WARNING  | __main__ | Imputed 1 rows in 'rain_1h' | reason: value outside physically plausible range; replaced with monthly median
-2026-09-16 23:35:28 | WARNING  | __main__ | Retained 2 rows with traffic_volume = 0 | reason: implausible for an interstate but not corrected, as the true value is unknown
-2026-09-16 23:35:28 | INFO     | __main__ | Missing-value handling complete | remaining nulls in numeric columns=0
-2026-09-16 23:35:28 | INFO     | __main__ | Cleaned dataset saved | rows=40575 (from 48204) | columns=10 | path=/home/claude/repo/data/processed/traffic_cleaned.csv
-2026-09-16 23:35:28 | INFO     | __main__ | Pipeline completed successfully
-2026-09-16 23:35:28 | INFO     | root | Logging configured | level=DEBUG | file=/home/claude/repo/logs/pipeline.log
-2026-09-16 23:35:28 | INFO     | __main__ | Loaded cleaned data | rows=40575 | columns=10
-2026-09-16 23:35:28 | INFO     | __main__ | Dataset shape BEFORE feature engineering | rows=40575 | columns=10
-2026-09-16 23:35:28 | INFO     | __main__ | Added time features | hour, day_of_week, month, year, is_weekend, hour_sin/cos, dow_sin/cos
-2026-09-16 23:35:28 | DEBUG    | __main__ | Weekend share: 0.286 | weekday rows=28979 | weekend rows=11596
-2026-09-16 23:35:28 | DEBUG    | __main__ | weather_main value counts: {'Clouds': 15123, 'Clear': 13364, 'Rain': 4513, 'Snow': 2786, 'Mist': 1936, 'Thunderstorm': 1007, 'Haze': 839, 'Fog': 617, 'Drizzle': 370, 'Smoke': 16, 'Squall': 4}
-2026-09-16 23:35:28 | WARNING  | __main__ | Collapsed 20 rows across 2 rare weather categories (Smoke, Squall) into 'Other' | reason: fewer than 100 observations each
-2026-09-16 23:35:28 | INFO     | __main__ | One-hot encoded weather into 10 indicator columns
-2026-09-16 23:35:28 | INFO     | __main__ | Added derived weather indicators | is_precipitation, is_low_visibility, has_rain, has_snow, temp_celsius
-2026-09-16 23:35:28 | DEBUG    | __main__ | Indicator rates | precipitation=0.205 | low visibility=0.084 | rain=0.051 | snow=0.001
-2026-09-16 23:35:28 | DEBUG    | __main__ | Scaling 'temp' | mean=281.3822 std=13.0937 min=243.3900 max=310.0700
-2026-09-16 23:35:28 | DEBUG    | __main__ | Scaling 'clouds_all' | mean=44.2022 std=38.6818 min=0.0000 max=100.0000
-2026-09-16 23:35:28 | INFO     | __main__ | Added scaled features | temp_z, temp_minmax, clouds_all_z, clouds_all_minmax
-2026-09-16 23:35:28 | DEBUG    | __main__ | Congestion quartile thresholds | Q1=1248.5 | Q2=3427.0 | Q3=4952.0
-2026-09-16 23:35:28 | INFO     | __main__ | Created congestion_level target | class counts: {'Low': 10144, 'Moderate': 10144, 'High': 10145, 'Severe': 10142}
-2026-09-16 23:35:28 | INFO     | __main__ | Created binary is_congested flag at the Part 1 threshold of 5500 | positive rate=0.1505
-2026-09-16 23:35:28 | INFO     | __main__ | Dataset shape AFTER feature engineering | rows=40575 | columns=42
-2026-09-16 23:35:28 | INFO     | __main__ | Feature table saved | path=/home/claude/repo/data/processed/traffic_features.csv
-2026-09-16 23:35:28 | INFO     | __main__ | Feature engineering completed successfully
-2026-09-16 23:35:29 | INFO     | root | Logging configured | level=DEBUG | file=/home/claude/repo/logs/pipeline.log
-2026-09-16 23:35:29 | INFO     | __main__ | Loaded feature table | rows=40575 | columns=42
-2026-09-16 23:35:29 | DEBUG    | __main__ | Weekday profile | peak hour=16 (6241) | trough hour=2 (303)
-2026-09-16 23:35:29 | DEBUG    | __main__ | Weekend profile | peak hour=13 (4408) | trough hour=4 (382)
-2026-09-16 23:35:29 | INFO     | __main__ | Figure saved | path=/home/claude/repo/capstone_part2/figures/01_hourly_profile.png
-2026-09-16 23:35:29 | DEBUG    | __main__ | Weather range | overall 2061.8-3616.7 (diff 1555.0) | n>=100 only 2653.8-3616.7 (diff 962.9)
-2026-09-16 23:35:29 | INFO     | __main__ | Figure saved | path=/home/claude/repo/capstone_part2/figures/02_weather_impact.png
-2026-09-16 23:35:29 | DEBUG    | __main__ | Temperature-traffic correlation on cleaned data: r=0.1395
-2026-09-16 23:35:30 | INFO     | __main__ | Figure saved | path=/home/claude/repo/capstone_part2/figures/03_temperature_scatter.png
-2026-09-16 23:35:30 | DEBUG    | __main__ | Months with fewer than 200 recorded hours: ['2014-08', '2015-06']
-2026-09-16 23:35:30 | INFO     | __main__ | Figure saved | path=/home/claude/repo/capstone_part2/figures/04_coverage_and_distribution.png
-2026-09-16 23:35:30 | INFO     | __main__ | All 4 figures generated successfully
+2026-09-17 07:56:26 | INFO     | root | Logging configured | level=DEBUG | file=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/logs/pipeline.log
+2026-09-17 07:56:26 | INFO     | __main__ | Loaded raw data | rows=48204 | columns=9 | source=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/data/raw/Metro_Interstate_Traffic_Volume.csv
+2026-09-17 07:56:26 | DEBUG    | __main__ | Raw dtypes: {'holiday': dtype('O'), 'temp': dtype('float64'), 'rain_1h': dtype('float64'), 'snow_1h': dtype('float64'), 'clouds_all': dtype('int64'), 'weather_main': dtype('O'), 'weather_description': dtype('O'), 'date_time': dtype('O'), 'traffic_volume': dtype('int64')}
+2026-09-17 07:56:26 | INFO     | __main__ | Schema validation passed | 9 expected columns present
+2026-09-17 07:56:26 | INFO     | __main__ | Parsed date_time | all 48204 timestamps valid
+2026-09-17 07:56:26 | INFO     | __main__ | Date range | first=2012-10-02 09:00:00 | last=2018-09-30 23:00:00
+2026-09-17 07:56:26 | INFO     | __main__ | Standardised categorical text in weather and holiday columns
+2026-09-17 07:56:26 | DEBUG    | __main__ | weather_main categories after standardisation: ['Clear', 'Clouds', 'Drizzle', 'Fog', 'Haze', 'Mist', 'Rain', 'Smoke', 'Snow', 'Squall', 'Thunderstorm']
+2026-09-17 07:56:26 | WARNING  | __main__ | Modified 1348 rows in 'holiday' | reason: forward-filled from 61 tagged midnight rows across 53 holiday dates
+2026-09-17 07:56:26 | DEBUG    | __main__ | Holiday dates identified: ['2012-10-08', '2012-11-12', '2012-11-22', '2012-12-25', '2013-01-01', '2013-02-18', '2013-05-27', '2013-07-04', '2013-08-22', '2013-09-02', '2013-10-14', '2013-11-11', '2013-11-28', '2013-12-25', '2014-01-01', '2014-01-20', '2014-02-17', '2014-05-26', '2015-07-03', '2015-08-27', '2015-09-07', '2015-10-12', '2015-11-11', '2015-11-26', '2015-12-25', '2016-01-01', '2016-02-15', '2016-05-30', '2016-07-04', '2016-08-25', '2016-09-05', '2016-10-10', '2016-11-11', '2016-11-24', '2016-12-26', '2017-01-02', '2017-01-16', '2017-02-20', '2017-05-29', '2017-07-04', '2017-08-24', '2017-09-04', '2017-10-09', '2017-11-10', '2017-11-23', '2017-12-25', '2018-01-01', '2018-01-15', '2018-02-19', '2018-05-28', '2018-07-04', '2018-08-23', '2018-09-03']
+2026-09-17 07:56:26 | WARNING  | __main__ | Dropped 17 rows | reason: fully duplicated records
+2026-09-17 07:56:26 | WARNING  | __main__ | Dropped 7612 rows | reason: repeated timestamps; retained the most severe weather observation per hour
+2026-09-17 07:56:26 | INFO     | __main__ | Duplicate handling complete | rows remaining=40575
+2026-09-17 07:56:26 | DEBUG    | __main__ | Imputed 4 rows in 'temp' for month 01 using median 265.48
+2026-09-17 07:56:26 | DEBUG    | __main__ | Imputed 6 rows in 'temp' for month 02 using median 265.89
+2026-09-17 07:56:26 | WARNING  | __main__ | Imputed 10 rows in 'temp' | reason: value outside physically plausible range; replaced with monthly median
+2026-09-17 07:56:26 | DEBUG    | __main__ | Imputed 1 rows in 'rain_1h' for month 07 using median 0.00
+2026-09-17 07:56:26 | WARNING  | __main__ | Imputed 1 rows in 'rain_1h' | reason: value outside physically plausible range; replaced with monthly median
+2026-09-17 07:56:26 | WARNING  | __main__ | Retained 2 rows with traffic_volume = 0 | reason: implausible for an interstate but not corrected, as the true value is unknown
+2026-09-17 07:56:26 | INFO     | __main__ | Missing-value handling complete | remaining nulls in numeric columns=0
+2026-09-17 07:56:26 | INFO     | __main__ | Cleaned dataset saved | rows=40575 (from 48204) | columns=10 | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/data/processed/traffic_cleaned.csv
+2026-09-17 07:56:26 | INFO     | __main__ | Pipeline completed successfully
+2026-09-17 07:56:26 | INFO     | root | Logging configured | level=DEBUG | file=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/logs/pipeline.log
+2026-09-17 07:56:26 | INFO     | __main__ | Loaded cleaned data | rows=40575 | columns=10
+2026-09-17 07:56:26 | INFO     | __main__ | Dataset shape BEFORE feature engineering | rows=40575 | columns=10
+2026-09-17 07:56:26 | INFO     | __main__ | Added time features | hour, day_of_week, month, year, is_weekend, hour_sin/cos, dow_sin/cos
+2026-09-17 07:56:26 | DEBUG    | __main__ | Weekend share: 0.286 | weekday rows=28979 | weekend rows=11596
+2026-09-17 07:56:27 | DEBUG    | __main__ | weather_main value counts: {'Clouds': 15123, 'Clear': 13364, 'Rain': 4513, 'Snow': 2786, 'Mist': 1936, 'Thunderstorm': 1007, 'Haze': 839, 'Fog': 617, 'Drizzle': 370, 'Smoke': 16, 'Squall': 4}
+2026-09-17 07:56:27 | WARNING  | __main__ | Collapsed 20 rows across 2 rare weather categories (Smoke, Squall) into 'Other' | reason: fewer than 100 observations each
+2026-09-17 07:56:27 | INFO     | __main__ | One-hot encoded weather into 10 indicator columns
+2026-09-17 07:56:27 | INFO     | __main__ | Added derived weather indicators | is_precipitation, is_low_visibility, has_rain, has_snow, temp_celsius
+2026-09-17 07:56:27 | DEBUG    | __main__ | Indicator rates | precipitation=0.205 | low visibility=0.084 | rain=0.051 | snow=0.001
+2026-09-17 07:56:27 | DEBUG    | __main__ | Scaling 'temp' | mean=281.3822 std=13.0937 min=243.3900 max=310.0700
+2026-09-17 07:56:27 | DEBUG    | __main__ | Scaling 'clouds_all' | mean=44.2022 std=38.6818 min=0.0000 max=100.0000
+2026-09-17 07:56:27 | INFO     | __main__ | Added scaled features | temp_z, temp_minmax, clouds_all_z, clouds_all_minmax
+2026-09-17 07:56:27 | DEBUG    | __main__ | Congestion quartile thresholds | Q1=1248.5 | Q2=3427.0 | Q3=4952.0
+2026-09-17 07:56:27 | INFO     | __main__ | Created congestion_level target | class counts: {'Low': 10144, 'Moderate': 10144, 'High': 10145, 'Severe': 10142}
+2026-09-17 07:56:27 | INFO     | __main__ | Created binary is_congested flag at the Part 1 threshold of 5500 | positive rate=0.1505
+2026-09-17 07:56:27 | INFO     | __main__ | Dataset shape AFTER feature engineering | rows=40575 | columns=42
+2026-09-17 07:56:27 | INFO     | __main__ | Feature table saved | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/data/processed/traffic_features.csv
+2026-09-17 07:56:27 | INFO     | __main__ | Feature engineering completed successfully
+2026-09-17 07:56:28 | INFO     | root | Logging configured | level=DEBUG | file=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/logs/pipeline.log
+2026-09-17 07:56:28 | INFO     | __main__ | Loaded feature table | rows=40575 | columns=42
+2026-09-17 07:56:28 | DEBUG    | __main__ | Weekday profile | peak hour=16 (6241) | trough hour=2 (303)
+2026-09-17 07:56:28 | DEBUG    | __main__ | Weekend profile | peak hour=13 (4408) | trough hour=4 (382)
+2026-09-17 07:56:28 | INFO     | __main__ | Figure saved | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part2/figures/01_hourly_profile.png
+2026-09-17 07:56:28 | DEBUG    | __main__ | Weather range | overall 2061.8-3616.7 (diff 1555.0) | n>=100 only 2653.8-3616.7 (diff 962.9)
+2026-09-17 07:56:28 | INFO     | __main__ | Figure saved | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part2/figures/02_weather_impact.png
+2026-09-17 07:56:28 | DEBUG    | __main__ | Temperature-traffic correlation on cleaned data: r=0.1395
+2026-09-17 07:56:29 | INFO     | __main__ | Figure saved | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part2/figures/03_temperature_scatter.png
+2026-09-17 07:56:29 | DEBUG    | __main__ | Months with fewer than 200 recorded hours: ['2014-08', '2015-06']
+2026-09-17 07:56:29 | INFO     | __main__ | Figure saved | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part2/figures/04_coverage_and_distribution.png
+2026-09-17 07:56:29 | INFO     | __main__ | All 4 figures generated successfully
