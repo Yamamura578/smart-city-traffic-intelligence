@@ -1,0 +1,250 @@
+2026-09-17 14:39:23 | INFO     | root | Logging configured | level=INFO | file=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/logs/part3.log
+2026-09-17 14:39:23 | INFO     | __main__ | MLflow tracking URI | sqlite:////Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/mlflow.db
+2026-09-17 14:39:23 | INFO     | __main__ | === Task 1a: classification on the proxy accident-risk label ===
+2026-09-17 14:39:23 | INFO     | capstone_part3.src.data | Loaded feature table | rows=40575 | columns=42
+2026-09-17 14:39:23 | INFO     | capstone_part3.src.data | Created proxy accident-risk label | positive=5514 (13.59%) | negative=35061
+2026-09-17 14:39:23 | INFO     | capstone_part3.src.data | Prepared X/y | features=27 | target='high_risk'
+2026-09-17 14:39:23 | INFO     | capstone_part3.src.data | Split data | train=32460 | test=8115 | test_size=0.20
+2026-09-17 14:39:23 | WARNING  | __main__ | Majority-class baseline accuracy is 0.8641 | accuracy alone is not an adequate metric for this target
+2026-09-17 14:39:25 | ERROR    | __main__ | Supervised modelling aborted
+Traceback (most recent call last):
+  File "/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/src/supervised.py", line 238, in main
+    "classification": run_classification(),
+                      ~~~~~~~~~~~~~~~~~~^^
+  File "/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/src/supervised.py", line 111, in run_classification
+    init_mlflow("traffic-accident-risk-classification")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/src/supervised.py", line 51, in init_mlflow
+    if mlflow.get_experiment_by_name(experiment) is None:
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/tracking/fluent.py", line 2200, in get_experiment_by_name
+    return MlflowClient().get_experiment_by_name(name)
+           ~~~~~~~~~~~~^^
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/tracking/client.py", line 254, in __init__
+    self._tracking_client = TrackingServiceClient(final_tracking_uri)
+                            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/tracking/_tracking_service/client.py", line 98, in __init__
+    self.store
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/tracking/_tracking_service/client.py", line 102, in store
+    return utils._get_store(self.tracking_uri)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/tracking/_tracking_service/utils.py", line 270, in _get_store
+    return _tracking_store_registry.get_store(store_uri, artifact_uri)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/tracking/_tracking_service/registry.py", line 45, in get_store
+    return self._get_store_with_resolved_uri(resolved_store_uri, artifact_uri)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/tracking/_tracking_service/registry.py", line 56, in _get_store_with_resolved_uri
+    return builder(store_uri=resolved_store_uri, artifact_uri=artifact_uri)
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/tracking/_tracking_service/utils.py", line 201, in _get_sqlalchemy_store
+    return store_cls(store_uri, artifact_uri)
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/store/tracking/sqlalchemy_store.py", line 390, in __init__
+    mlflow.store.db.utils._verify_schema(self.engine)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/store/db/utils.py", line 127, in _verify_schema
+    raise MlflowException(
+    ...<6 lines>...
+    )
+mlflow.exceptions.MlflowException: Detected out-of-date database schema (found version b7e2c1a4d9f3, but expected 6f8d9c3b2a1e). Take a backup of your database, then run 'mlflow db upgrade <database_uri>' to migrate your database to the latest schema. NOTE: schema migration may result in database downtime - please consult your database's documentation for more detail.
+2026-09-17 14:39:28 | INFO     | root | Logging configured | level=INFO | file=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/logs/part3.log
+2026-09-17 14:39:28 | INFO     | capstone_part3.src.data | Loaded feature table | rows=40575 | columns=42
+2026-09-17 14:39:28 | INFO     | capstone_part3.src.data | Created proxy accident-risk label | positive=5514 (13.59%) | negative=35061
+2026-09-17 14:39:28 | INFO     | __main__ | === Task 2a: K-means clustering of traffic conditions ===
+2026-09-17 14:39:44 | INFO     | __main__ | Selected k=8 by silhouette score (0.3268)
+2026-09-17 14:39:47 | INFO     | __main__ | Cluster profiles:
+            n  mean_hour  mean_volume  mean_severity  mean_temp  weekend_share
+cluster                                                                       
+0        5685      16.18      3632.17           0.66      10.96            1.0
+1        5444      11.47      5171.73           0.81      -4.59            0.0
+2        6794       2.40       759.52           1.40       5.69            0.0
+3        6986      12.69      5253.78           0.66      20.08            0.0
+4        2325      11.36      2530.02           4.49       8.57            1.0
+5        3584       4.17      1084.63           0.70       3.90            1.0
+6        5092      13.34      4263.09           4.54       8.58            0.0
+7        4665      21.12      2438.16           0.72       8.62            0.0
+2026-09-17 14:39:47 | INFO     | __main__ | Cluster 0: high-volume afternoon/evening hours, mostly weekend, mild weather (n=5,685, mean volume 3632)
+2026-09-17 14:39:47 | INFO     | __main__ | Cluster 1: high-volume midday hours, mostly weekday, mild weather (n=5,444, mean volume 5172)
+2026-09-17 14:39:47 | INFO     | __main__ | Cluster 2: low-volume overnight hours, mostly weekday, mild weather (n=6,794, mean volume 760)
+2026-09-17 14:39:47 | INFO     | __main__ | Cluster 3: high-volume midday hours, mostly weekday, mild weather (n=6,986, mean volume 5254)
+2026-09-17 14:39:47 | INFO     | __main__ | Cluster 4: low-volume midday hours, mostly weekend, adverse weather (n=2,325, mean volume 2530)
+2026-09-17 14:39:47 | INFO     | __main__ | Cluster 5: low-volume overnight hours, mostly weekend, mild weather (n=3,584, mean volume 1085)
+2026-09-17 14:39:47 | INFO     | __main__ | Cluster 6: high-volume midday hours, mostly weekday, adverse weather (n=5,092, mean volume 4263)
+2026-09-17 14:39:47 | INFO     | __main__ | Cluster 7: low-volume late evening hours, mostly weekday, mild weather (n=4,665, mean volume 2438)
+2026-09-17 14:39:47 | INFO     | __main__ | Figure saved | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/figures/05_clusters.png
+2026-09-17 14:39:47 | INFO     | __main__ | === Task 2b: association rule mining ===
+2026-09-17 14:39:47 | INFO     | __main__ | Built transaction matrix | rows=40575 | items=16
+2026-09-17 14:39:47 | INFO     | __main__ | Frequent itemsets found | count=383 | min_support=0.020
+2026-09-17 14:39:47 | INFO     | __main__ | Rules predicting congestion | count=142 | min_lift=1.20
+2026-09-17 14:39:47 | INFO     | __main__ | Rule | When day_type is weekend, temp_band is freezing, time_band is night, congestion is Low in 95% of hours — 3.79x more likely than the base rate.
+2026-09-17 14:39:47 | INFO     | __main__ | Rule | When day_type is weekend, time_band is night, weather_band is adverse_weather, congestion is Low in 91% of hours — 3.63x more likely than the base rate.
+2026-09-17 14:39:47 | INFO     | __main__ | Rule | When day_type is weekday, temp_band is cool, time_band is morning_peak, congestion is Severe in 90% of hours — 3.62x more likely than the base rate.
+2026-09-17 14:39:47 | INFO     | __main__ | Rule | When day_type is weekday, temp_band is cool, time_band is morning_peak, weather_band is fair_weather, congestion is Severe in 90% of hours — 3.61x more likely than the base rate.
+2026-09-17 14:39:47 | INFO     | __main__ | Rule | When day_type is weekend, time_band is night, congestion is Low in 90% of hours — 3.58x more likely than the base rate.
+2026-09-17 14:39:47 | INFO     | __main__ | Rule | When day_type is weekend, time_band is night, weather_band is fair_weather, congestion is Low in 89% of hours — 3.56x more likely than the base rate.
+2026-09-17 14:39:47 | INFO     | __main__ | Rule | When day_type is weekend, temp_band is cool, time_band is night, congestion is Low in 89% of hours — 3.56x more likely than the base rate.
+2026-09-17 14:39:47 | INFO     | __main__ | Rule | When day_type is weekday, temp_band is warm, time_band is late_evening, weather_band is fair_weather, congestion is Moderate in 88% of hours — 3.52x more likely than the base rate.
+2026-09-17 14:39:47 | INFO     | __main__ | Rules saved | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/reports/association_rules.csv
+2026-09-17 14:39:47 | INFO     | __main__ | Results written | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/reports/unsupervised_results.json
+2026-09-17 14:39:47 | INFO     | __main__ | Unsupervised analysis completed successfully
+2026-09-17 14:39:53 | INFO     | root | Logging configured | level=INFO | file=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/logs/part3.log
+2026-09-17 14:39:53 | INFO     | capstone_part3.src.data | Loaded feature table | rows=40575 | columns=42
+2026-09-17 14:39:53 | INFO     | __main__ | === Task 3: LSTM demand prediction (PyTorch) ===
+2026-09-17 14:39:53 | WARNING  | __main__ | Using PyTorch rather than TensorFlow | reason: TensorFlow segfaults on the target platform (Python 3.13 / macOS arm64)
+2026-09-17 14:39:53 | WARNING  | __main__ | Dropped 11680 candidate windows | reason: the 24 preceding hours were not consecutive (coverage gaps and de-duplicated hours)
+2026-09-17 14:39:53 | INFO     | __main__ | Built sequences | windows=28871 | shape=(28871, 24, 27)
+2026-09-17 14:39:53 | INFO     | __main__ | Chronological split | train=23096 | test=5775
+2026-09-17 14:39:54 | ERROR    | __main__ | Deep learning step aborted
+Traceback (most recent call last):
+  File "/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/src/deep_learning.py", line 234, in main
+    if mlflow.get_experiment_by_name("traffic-deep-learning") is None:
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/tracking/fluent.py", line 2200, in get_experiment_by_name
+    return MlflowClient().get_experiment_by_name(name)
+           ~~~~~~~~~~~~^^
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/tracking/client.py", line 254, in __init__
+    self._tracking_client = TrackingServiceClient(final_tracking_uri)
+                            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/tracking/_tracking_service/client.py", line 98, in __init__
+    self.store
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/tracking/_tracking_service/client.py", line 102, in store
+    return utils._get_store(self.tracking_uri)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/tracking/_tracking_service/utils.py", line 270, in _get_store
+    return _tracking_store_registry.get_store(store_uri, artifact_uri)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/tracking/_tracking_service/registry.py", line 45, in get_store
+    return self._get_store_with_resolved_uri(resolved_store_uri, artifact_uri)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/tracking/_tracking_service/registry.py", line 56, in _get_store_with_resolved_uri
+    return builder(store_uri=resolved_store_uri, artifact_uri=artifact_uri)
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/tracking/_tracking_service/utils.py", line 201, in _get_sqlalchemy_store
+    return store_cls(store_uri, artifact_uri)
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/store/tracking/sqlalchemy_store.py", line 390, in __init__
+    mlflow.store.db.utils._verify_schema(self.engine)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.13/site-packages/mlflow/store/db/utils.py", line 127, in _verify_schema
+    raise MlflowException(
+    ...<6 lines>...
+    )
+mlflow.exceptions.MlflowException: Detected out-of-date database schema (found version b7e2c1a4d9f3, but expected 6f8d9c3b2a1e). Take a backup of your database, then run 'mlflow db upgrade <database_uri>' to migrate your database to the latest schema. NOTE: schema migration may result in database downtime - please consult your database's documentation for more detail.
+2026-09-17 14:39:56 | INFO     | root | Logging configured | level=INFO | file=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/logs/part3.log
+2026-09-17 14:39:56 | INFO     | capstone_part3.src.data | Loaded feature table | rows=40575 | columns=42
+2026-09-17 14:39:56 | INFO     | __main__ | Monitoring windows | reference=28925 rows (<2017-06-01) | current=11650 rows (>=2017-06-01)
+2026-09-17 14:39:56 | ERROR    | __main__ | Monitoring run aborted
+Traceback (most recent call last):
+  File "/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/src/monitoring.py", line 116, in main
+    model = joblib.load(model_path)
+  File "/opt/anaconda3/lib/python3.13/site-packages/joblib/numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+        fobj,
+    ...<2 lines>...
+        mmap_mode=validated_mmap_mode,
+    )
+  File "/opt/anaconda3/lib/python3.13/site-packages/joblib/numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+  File "/opt/anaconda3/lib/python3.13/pickle.py", line 1256, in load
+    dispatch[key[0]](self)
+    ~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/anaconda3/lib/python3.13/pickle.py", line 1581, in load_stack_global
+    self.append(self.find_class(module, name))
+                ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.13/pickle.py", line 1622, in find_class
+    __import__(module, level=0)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named '_loss'
+2026-09-17 14:39:58 | INFO     | root | Logging configured | level=INFO | file=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/logs/part3.log
+2026-09-17 14:39:58 | INFO     | __main__ | Recommender invoked | arguments={'day_type': 'weekday', 'weather': 'Rain', 'earliest': 6, 'latest': 20}
+2026-09-17 14:39:58 | INFO     | capstone_part3.src.data | Loaded feature table | rows=40575 | columns=42
+2026-09-17 14:39:58 | INFO     | __main__ | Filtered to weather='Rain' | rows=3325
+2026-09-17 14:39:58 | INFO     | __main__ | Built hourly profile | day_type=weekday | rows=3325
+2026-09-17 14:39:58 | INFO     | __main__ | Recommendation generated | For a weekday journey in rain conditions, consider travelling between 19:00 and 21:00, when historical traffic volumes average 2,816 vehicles/hour — about 21% below the daily average. Avoid 16:00, the busiest hour in this window at 6,275 vehicles/hour.
+2026-09-17 14:39:58 | INFO     | __main__ | Example recommendation saved | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/reports/recommendation_example.json
+2026-09-17 14:42:25 | INFO     | root | Logging configured | level=INFO | file=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/logs/part3.log
+2026-09-17 14:42:25 | INFO     | __main__ | MLflow tracking URI | sqlite:////Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/mlflow.db
+2026-09-17 14:42:25 | INFO     | __main__ | === Task 1a: classification on the proxy accident-risk label ===
+2026-09-17 14:42:25 | INFO     | capstone_part3.src.data | Loaded feature table | rows=40575 | columns=42
+2026-09-17 14:42:25 | INFO     | capstone_part3.src.data | Created proxy accident-risk label | positive=5514 (13.59%) | negative=35061
+2026-09-17 14:42:25 | INFO     | capstone_part3.src.data | Prepared X/y | features=27 | target='high_risk'
+2026-09-17 14:42:25 | INFO     | capstone_part3.src.data | Split data | train=32460 | test=8115 | test_size=0.20
+2026-09-17 14:42:25 | WARNING  | __main__ | Majority-class baseline accuracy is 0.8641 | accuracy alone is not an adequate metric for this target
+2026-09-17 14:42:26 | INFO     | __main__ | MLflow experiment selected | traffic-accident-risk-classification
+2026-09-17 14:42:27 | INFO     | __main__ | logistic_regression | accuracy=0.9675 precision=0.8142 recall=0.9855 f1=0.8917 roc_auc=0.9953
+2026-09-17 14:42:27 | INFO     | __main__ | logistic_regression | confusion matrix: TN=6764 FP=248 FN=16 TP=1087
+2026-09-17 14:42:34 | INFO     | __main__ | logistic_regression | fitted in 0.14s | logged to MLflow
+2026-09-17 14:42:34 | INFO     | __main__ | Model saved | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/models/classifier_logistic_regression.joblib
+2026-09-17 14:42:34 | INFO     | __main__ | random_forest | accuracy=0.9860 precision=0.9152 recall=0.9882 f1=0.9503 roc_auc=0.9987
+2026-09-17 14:42:34 | INFO     | __main__ | random_forest | confusion matrix: TN=6911 FP=101 FN=13 TP=1090
+2026-09-17 14:42:37 | INFO     | __main__ | random_forest | fitted in 0.56s | logged to MLflow
+2026-09-17 14:42:37 | INFO     | __main__ | Model saved | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/models/classifier_random_forest.joblib
+2026-09-17 14:42:37 | INFO     | __main__ | Best classifier by ROC AUC: random_forest (0.9987)
+2026-09-17 14:42:37 | INFO     | __main__ | === Task 1b: regression on hourly traffic volume ===
+2026-09-17 14:42:37 | INFO     | capstone_part3.src.data | Loaded feature table | rows=40575 | columns=42
+2026-09-17 14:42:37 | INFO     | capstone_part3.src.data | Created proxy accident-risk label | positive=5514 (13.59%) | negative=35061
+2026-09-17 14:42:37 | INFO     | capstone_part3.src.data | Prepared X/y | features=27 | target='traffic_volume'
+2026-09-17 14:42:37 | INFO     | capstone_part3.src.data | Split data | train=32460 | test=8115 | test_size=0.20
+2026-09-17 14:42:37 | WARNING  | __main__ | Mean-prediction baseline MAE is 1738.0 vehicles/hour | any model must beat this
+2026-09-17 14:42:37 | INFO     | __main__ | MLflow experiment selected | traffic-volume-regression
+2026-09-17 14:42:37 | INFO     | __main__ | linear_regression | MAE=806.2 RMSE=1029.8 R2=0.7293
+2026-09-17 14:42:40 | INFO     | __main__ | linear_regression | fitted in 0.02s | logged to MLflow
+2026-09-17 14:42:40 | INFO     | __main__ | Model saved | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/models/regressor_linear_regression.joblib
+2026-09-17 14:42:51 | INFO     | __main__ | gradient_boosting | MAE=231.0 RMSE=372.4 R2=0.9646
+2026-09-17 14:42:54 | INFO     | __main__ | gradient_boosting | fitted in 10.84s | logged to MLflow
+2026-09-17 14:42:54 | INFO     | __main__ | Model saved | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/models/regressor_gradient_boosting.joblib
+2026-09-17 14:42:54 | INFO     | __main__ | Best regressor by R2: gradient_boosting (R2=0.9646, MAE=231.0, 86.7% better than baseline)
+2026-09-17 14:42:54 | INFO     | __main__ | Results written | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/reports/model_results.json
+2026-09-17 14:42:54 | INFO     | __main__ | Supervised modelling completed successfully
+2026-09-17 14:42:59 | INFO     | root | Logging configured | level=INFO | file=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/logs/part3.log
+2026-09-17 14:42:59 | INFO     | capstone_part3.src.data | Loaded feature table | rows=40575 | columns=42
+2026-09-17 14:42:59 | INFO     | __main__ | === Task 3: LSTM demand prediction (PyTorch) ===
+2026-09-17 14:42:59 | WARNING  | __main__ | Using PyTorch rather than TensorFlow | reason: TensorFlow segfaults on the target platform (Python 3.13 / macOS arm64)
+2026-09-17 14:42:59 | WARNING  | __main__ | Dropped 11680 candidate windows | reason: the 24 preceding hours were not consecutive (coverage gaps and de-duplicated hours)
+2026-09-17 14:42:59 | INFO     | __main__ | Built sequences | windows=28871 | shape=(28871, 24, 27)
+2026-09-17 14:42:59 | INFO     | __main__ | Chronological split | train=23096 | test=5775
+2026-09-17 14:43:08 | INFO     | __main__ | Epoch  1/15 | train_loss=0.3440 | test MAE=377.2 vehicles/hour
+2026-09-17 14:43:10 | INFO     | __main__ | Epoch  2/15 | train_loss=0.0582 | test MAE=242.2 vehicles/hour
+2026-09-17 14:43:13 | INFO     | __main__ | Epoch  3/15 | train_loss=0.0436 | test MAE=232.7 vehicles/hour
+2026-09-17 14:43:16 | INFO     | __main__ | Epoch  4/15 | train_loss=0.0386 | test MAE=220.9 vehicles/hour
+2026-09-17 14:43:19 | INFO     | __main__ | Epoch  5/15 | train_loss=0.0348 | test MAE=225.0 vehicles/hour
+2026-09-17 14:43:22 | INFO     | __main__ | Epoch  6/15 | train_loss=0.0326 | test MAE=226.2 vehicles/hour
+2026-09-17 14:43:26 | INFO     | __main__ | Epoch  7/15 | train_loss=0.0305 | test MAE=250.5 vehicles/hour
+2026-09-17 14:43:29 | INFO     | __main__ | Epoch  8/15 | train_loss=0.0289 | test MAE=196.4 vehicles/hour
+2026-09-17 14:43:32 | INFO     | __main__ | Epoch  9/15 | train_loss=0.0276 | test MAE=185.4 vehicles/hour
+2026-09-17 14:43:35 | INFO     | __main__ | Epoch 10/15 | train_loss=0.0266 | test MAE=179.3 vehicles/hour
+2026-09-17 14:43:38 | INFO     | __main__ | Epoch 11/15 | train_loss=0.0252 | test MAE=181.7 vehicles/hour
+2026-09-17 14:43:42 | INFO     | __main__ | Epoch 12/15 | train_loss=0.0246 | test MAE=187.7 vehicles/hour
+2026-09-17 14:43:45 | INFO     | __main__ | Epoch 13/15 | train_loss=0.0237 | test MAE=193.3 vehicles/hour
+2026-09-17 14:43:48 | INFO     | __main__ | Epoch 14/15 | train_loss=0.0232 | test MAE=194.9 vehicles/hour
+2026-09-17 14:43:51 | INFO     | __main__ | Epoch 15/15 | train_loss=0.0222 | test MAE=185.3 vehicles/hour
+2026-09-17 14:43:51 | INFO     | __main__ | LSTM | MAE=185.3 RMSE=265.9 R2=0.9820 | 59201 parameters | trained in 46.7s
+2026-09-17 14:43:51 | INFO     | __main__ | Model saved | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/models/lstm_demand.pt
+2026-09-17 14:43:52 | INFO     | __main__ | Figure saved | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/figures/07_lstm_predictions.png
+2026-09-17 14:43:52 | INFO     | __main__ | === SHAP explainability (gradient-boosting surrogate) ===
+2026-09-17 14:44:00 | INFO     | __main__ | Surrogate | MAE=239.9 | R2=0.9586
+2026-09-17 14:44:00 | INFO     | __main__ | SHAP values computed | sample=2000 rows
+2026-09-17 14:44:00 | INFO     | __main__ | Top 10 features by mean |SHAP|:
+hour_cos       1452.06
+hour            413.60
+hour_sin        208.49
+is_weekend      194.25
+dow_sin         129.95
+day_of_week      89.15
+month            79.65
+temp             59.30
+dow_cos          58.02
+is_holiday       49.52
+2026-09-17 14:44:01 | INFO     | __main__ | Figure saved | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/figures/06_shap_summary.png
+2026-09-17 14:44:01 | INFO     | __main__ | Results written | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/reports/deep_learning_results.json
+2026-09-17 14:44:01 | INFO     | __main__ | Deep learning and explainability completed successfully
+2026-09-17 14:44:04 | INFO     | root | Logging configured | level=INFO | file=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/logs/part3.log
+2026-09-17 14:44:04 | INFO     | capstone_part3.src.data | Loaded feature table | rows=40575 | columns=42
+2026-09-17 14:44:04 | INFO     | __main__ | Monitoring windows | reference=28925 rows (<2017-06-01) | current=11650 rows (>=2017-06-01)
+2026-09-17 14:44:04 | INFO     | __main__ | Loaded monitored model | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/models/regressor_gradient_boosting.joblib
+2026-09-17 14:44:04 | INFO     | __main__ | === Task 6.4a: feature distribution drift (PSI) ===
+2026-09-17 14:44:04 | WARNING  | __main__ | Feature drift ALERT | clouds_all | PSI=0.3331 (warn>=0.10, alert>=0.25)
+2026-09-17 14:44:04 | WARNING  | __main__ | Feature drift WARN | month | PSI=0.1855 (warn>=0.10, alert>=0.25)
+2026-09-17 14:44:04 | WARNING  | __main__ | Feature drift WARN | temp | PSI=0.1211 (warn>=0.10, alert>=0.25)
+2026-09-17 14:44:04 | INFO     | __main__ | Feature drift overall status | ALERT
+2026-09-17 14:44:04 | INFO     | __main__ | === Task 6.4b: prediction error drift ===
+2026-09-17 14:44:04 | INFO     | __main__ | Reference MAE=223.1 | current MAE=192.6 | ratio=0.863
+2026-09-17 14:44:04 | INFO     | __main__ | Monitoring report written | path=/Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/reports/monitoring_report.json
+2026-09-17 14:44:04 | INFO     | __main__ | Monitoring completed successfully

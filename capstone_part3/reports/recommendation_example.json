@@ -1,0 +1,28 @@
+{
+  "day_type": "weekday",
+  "weather": "Rain",
+  "search_window": [
+    6,
+    20
+  ],
+  "recommended_hours": [
+    {
+      "hour": 20,
+      "mean_volume": 2816.1
+    },
+    {
+      "hour": 19,
+      "mean_volume": 3290.3
+    },
+    {
+      "hour": 10,
+      "mean_volume": 4433.2
+    }
+  ],
+  "busiest_hour": {
+    "hour": 16,
+    "mean_volume": 6275.0
+  },
+  "percent_below_average": 21.5,
+  "recommendation": "For a weekday journey in rain conditions, consider travelling between 19:00 and 21:00, when historical traffic volumes average 2,816 vehicles/hour \u2014 about 21% below the daily average. Avoid 16:00, the busiest hour in this window at 6,275 vehicles/hour."
+}

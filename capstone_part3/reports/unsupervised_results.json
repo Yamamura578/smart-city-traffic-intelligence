@@ -1,0 +1,159 @@
+{
+  "clustering": {
+    "best_k": 8,
+    "silhouette_scores": {
+      "2": 0.27473991329206165,
+      "3": 0.28650737575550284,
+      "4": 0.2949376608820977,
+      "5": 0.26533185776768425,
+      "6": 0.3027082341115761,
+      "7": 0.31413753070619505,
+      "8": 0.3267977598682879
+    },
+    "profiles": {
+      "0": {
+        "n": 5685,
+        "mean_hour": 16.18,
+        "mean_volume": 3632.17,
+        "mean_severity": 0.66,
+        "mean_temp": 10.96,
+        "weekend_share": 1.0
+      },
+      "1": {
+        "n": 5444,
+        "mean_hour": 11.47,
+        "mean_volume": 5171.73,
+        "mean_severity": 0.81,
+        "mean_temp": -4.59,
+        "weekend_share": 0.0
+      },
+      "2": {
+        "n": 6794,
+        "mean_hour": 2.4,
+        "mean_volume": 759.52,
+        "mean_severity": 1.4,
+        "mean_temp": 5.69,
+        "weekend_share": 0.0
+      },
+      "3": {
+        "n": 6986,
+        "mean_hour": 12.69,
+        "mean_volume": 5253.78,
+        "mean_severity": 0.66,
+        "mean_temp": 20.08,
+        "weekend_share": 0.0
+      },
+      "4": {
+        "n": 2325,
+        "mean_hour": 11.36,
+        "mean_volume": 2530.02,
+        "mean_severity": 4.49,
+        "mean_temp": 8.57,
+        "weekend_share": 1.0
+      },
+      "5": {
+        "n": 3584,
+        "mean_hour": 4.17,
+        "mean_volume": 1084.63,
+        "mean_severity": 0.7,
+        "mean_temp": 3.9,
+        "weekend_share": 1.0
+      },
+      "6": {
+        "n": 5092,
+        "mean_hour": 13.34,
+        "mean_volume": 4263.09,
+        "mean_severity": 4.54,
+        "mean_temp": 8.58,
+        "weekend_share": 0.0
+      },
+      "7": {
+        "n": 4665,
+        "mean_hour": 21.12,
+        "mean_volume": 2438.16,
+        "mean_severity": 0.72,
+        "mean_temp": 8.62,
+        "weekend_share": 0.0
+      }
+    },
+    "interpretations": {
+      "0": "high-volume afternoon/evening hours, mostly weekend, mild weather (n=5,685, mean volume 3632)",
+      "1": "high-volume midday hours, mostly weekday, mild weather (n=5,444, mean volume 5172)",
+      "2": "low-volume overnight hours, mostly weekday, mild weather (n=6,794, mean volume 760)",
+      "3": "high-volume midday hours, mostly weekday, mild weather (n=6,986, mean volume 5254)",
+      "4": "low-volume midday hours, mostly weekend, adverse weather (n=2,325, mean volume 2530)",
+      "5": "low-volume overnight hours, mostly weekend, mild weather (n=3,584, mean volume 1085)",
+      "6": "high-volume midday hours, mostly weekday, adverse weather (n=5,092, mean volume 4263)",
+      "7": "low-volume late evening hours, mostly weekday, mild weather (n=4,665, mean volume 2438)"
+    }
+  },
+  "association_rules": {
+    "n_rules": 142,
+    "top_rules": [
+      {
+        "antecedents": "day_type=weekend, temp_band=freezing, time_band=night",
+        "consequents": "congestion_level=Low",
+        "support": 0.0224,
+        "confidence": 0.9469,
+        "lift": 3.788,
+        "plain_language": "When day_type is weekend, temp_band is freezing, time_band is night, congestion is Low in 95% of hours \u2014 3.79x more likely than the base rate."
+      },
+      {
+        "antecedents": "day_type=weekend, time_band=night, weather_band=adverse_weather",
+        "consequents": "congestion_level=Low",
+        "support": 0.021,
+        "confidence": 0.9073,
+        "lift": 3.629,
+        "plain_language": "When day_type is weekend, time_band is night, weather_band is adverse_weather, congestion is Low in 91% of hours \u2014 3.63x more likely than the base rate."
+      },
+      {
+        "antecedents": "day_type=weekday, temp_band=cool, time_band=morning_peak",
+        "consequents": "congestion_level=Severe",
+        "support": 0.0385,
+        "confidence": 0.904,
+        "lift": 3.617,
+        "plain_language": "When day_type is weekday, temp_band is cool, time_band is morning_peak, congestion is Severe in 90% of hours \u2014 3.62x more likely than the base rate."
+      },
+      {
+        "antecedents": "day_type=weekday, temp_band=cool, time_band=morning_peak, weather_band=fair_weather",
+        "consequents": "congestion_level=Severe",
+        "support": 0.0239,
+        "confidence": 0.9021,
+        "lift": 3.609,
+        "plain_language": "When day_type is weekday, temp_band is cool, time_band is morning_peak, weather_band is fair_weather, congestion is Severe in 90% of hours \u2014 3.61x more likely than the base rate."
+      },
+      {
+        "antecedents": "day_type=weekend, time_band=night",
+        "consequents": "congestion_level=Low",
+        "support": 0.0643,
+        "confidence": 0.8963,
+        "lift": 3.585,
+        "plain_language": "When day_type is weekend, time_band is night, congestion is Low in 90% of hours \u2014 3.58x more likely than the base rate."
+      },
+      {
+        "antecedents": "day_type=weekend, time_band=night, weather_band=fair_weather",
+        "consequents": "congestion_level=Low",
+        "support": 0.0434,
+        "confidence": 0.8911,
+        "lift": 3.564,
+        "plain_language": "When day_type is weekend, time_band is night, weather_band is fair_weather, congestion is Low in 89% of hours \u2014 3.56x more likely than the base rate."
+      },
+      {
+        "antecedents": "day_type=weekend, temp_band=cool, time_band=night",
+        "consequents": "congestion_level=Low",
+        "support": 0.0232,
+        "confidence": 0.8902,
+        "lift": 3.561,
+        "plain_language": "When day_type is weekend, temp_band is cool, time_band is night, congestion is Low in 89% of hours \u2014 3.56x more likely than the base rate."
+      },
+      {
+        "antecedents": "day_type=weekday, temp_band=warm, time_band=late_evening, weather_band=fair_weather",
+        "consequents": "congestion_level=Moderate",
+        "support": 0.0316,
+        "confidence": 0.8798,
+        "lift": 3.519,
+        "plain_language": "When day_type is weekday, temp_band is warm, time_band is late_evening, weather_band is fair_weather, congestion is Moderate in 88% of hours \u2014 3.52x more likely than the base rate."
+      }
+    ]
+  }
+}

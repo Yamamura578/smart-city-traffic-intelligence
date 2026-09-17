@@ -1,0 +1,127 @@
+{
+  "generated_at": "2026-09-17T14:44:04",
+  "split_date": "2017-06-01",
+  "reference_rows": 28925,
+  "current_rows": 11650,
+  "feature_drift": {
+    "status": "ALERT",
+    "n_drifted": 3,
+    "per_feature": {
+      "hour": {
+        "psi": 0.0002,
+        "status": "PASS"
+      },
+      "day_of_week": {
+        "psi": 0.0001,
+        "status": "PASS"
+      },
+      "month": {
+        "psi": 0.1855,
+        "status": "WARN"
+      },
+      "is_weekend": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "is_holiday": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "hour_sin": {
+        "psi": 0.0001,
+        "status": "PASS"
+      },
+      "hour_cos": {
+        "psi": 0.0002,
+        "status": "PASS"
+      },
+      "dow_sin": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "dow_cos": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "temp": {
+        "psi": 0.1211,
+        "status": "WARN"
+      },
+      "rain_1h": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "snow_1h": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "clouds_all": {
+        "psi": 0.3331,
+        "status": "ALERT"
+      },
+      "is_precipitation": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "is_low_visibility": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "has_rain": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "has_snow": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "weather_Clear": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "weather_Clouds": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "weather_Drizzle": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "weather_Fog": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "weather_Haze": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "weather_Mist": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "weather_Other": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "weather_Rain": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "weather_Snow": {
+        "psi": 0.0,
+        "status": "PASS"
+      },
+      "weather_Thunderstorm": {
+        "psi": 0.0,
+        "status": "PASS"
+      }
+    }
+  },
+  "error_drift": {
+    "status": "PASS",
+    "reference_mae": 223.1,
+    "current_mae": 192.6,
+    "ratio": 0.863
+  },
+  "overall_status": "ALERT"
+}
