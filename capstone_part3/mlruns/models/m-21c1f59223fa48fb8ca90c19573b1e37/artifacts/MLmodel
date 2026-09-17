@@ -1,0 +1,23 @@
+artifact_path: file:///Users/stefanmueller/Downloads/smart-city-traffic-intelligence/capstone_part3/mlruns/models/m-21c1f59223fa48fb8ca90c19573b1e37/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.9
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.9.1
+    skops_trusted_types: null
+mlflow_version: 3.15.1
+model_id: m-21c1f59223fa48fb8ca90c19573b1e37
+model_size_bytes: 8113808
+model_uuid: m-21c1f59223fa48fb8ca90c19573b1e37
+prompts: null
+run_id: 29b85b9385c34ef58e5cde4e1a3099e4
+utc_time_created: '2026-09-17 06:42:34.760948'
